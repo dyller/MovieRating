@@ -14,7 +14,6 @@ Makefile.in
 *.suo
 *.cache
 *.pidb
-*.json
 *.userprefs
 *.usertasks
 config.log
