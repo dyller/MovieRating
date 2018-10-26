@@ -9,6 +9,7 @@ namespace MovieRating
 {
     public class MovieData : IMovieData
     {
+        public List<Reviews> list;
         public void JustBasic()
         {
             using (StreamReader r = new StreamReader("C:/Users/Samuel/Downloads/ratings.json"))
@@ -37,14 +38,32 @@ namespace MovieRating
             }
             Console.ReadLine();
         }
+        
         public double AverageGrade(double Reviewer)
         {
             throw new NotImplementedException();
         }
 
+        //On input N, what is the average rate that reviewer N had given?
         public double AverageReviewerGrade(int Movie)
         {
-            throw new NotImplementedException();
+            List<int> gradeList = new List<int>();
+            double total = 0;
+            double amount = 0;
+            foreach (var grade in list.Where(g => g.Reviewer == Movie))
+            {
+                gradeList.Add(grade.Grade);
+                total = total +1;
+            }
+            foreach (var number in gradeList)
+            {
+                amount = amount + number;
+            }
+            double average = amount / total;
+            Console.WriteLine("The average of this reviewer is....:" + Math.Round(average, 2));
+            
+            return average;
+           
         }
 
         public int[] CountReviews()
