@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace MovieRating
 {
     class MovieData : IMovieData
     {
+        
         public double AverageGrade(double Reviewer)
         {
             throw new NotImplementedException();
