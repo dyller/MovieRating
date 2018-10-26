@@ -43,7 +43,22 @@ namespace MovieRating
         
         public double AverageGrade(double Reviewer)
         {
-            throw new NotImplementedException();
+            string path = @"W:/Skóli/CompulsoryTDDJSON/ratings.json";
+            Console.WriteLine("Works");
+
+            IEnumerable<Reviews> hash = JsonConvert.DeserializeObject<IEnumerable<Reviews>>(File.ReadAllText(path));
+
+            int userInput = Convert.ToInt32(Console.ReadLine());
+            int count = 0;
+            foreach (var item in hash.Where(w => w.Reviewer == userInput))
+            {
+                Console.WriteLine("Reviewer: " + item.Reviewer + " Movie: " + item.Movie + " Grade: " + item.Grade);
+                count++;
+            }
+            Console.WriteLine(count + " amount of Reviews");
+            Console.ReadLine();
+
+            return count;
         }
 
         //On input N, what is the average rate that reviewer N had given?
