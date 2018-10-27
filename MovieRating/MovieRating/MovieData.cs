@@ -155,7 +155,7 @@ namespace MovieRating
             double avg = hash.Average(r => r.Grade);
 
             Console.WriteLine("Number of reviewers that have reviewed this movie: " + count);
-            Console.WriteLine("Avg: " + avg);
+            Console.WriteLine("Avg: " + avg.ToString("#.##"));
             Console.ReadLine();
         }
 
