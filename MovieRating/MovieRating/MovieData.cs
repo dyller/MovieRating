@@ -41,6 +41,7 @@ namespace MovieRating
         //    Console.ReadLine();
         //}
         
+            //1
         public double AverageGrade(double Reviewer)
         {
             string path = @"W:/Skóli/CompulsoryTDDJSON/ratings.json";
@@ -83,6 +84,7 @@ namespace MovieRating
            
         }
 
+        //3
         public int[] CountReviews()
         {
             string path = @"W:/Skóli/CompulsoryTDDJSON/ratings.json";
@@ -106,6 +108,7 @@ namespace MovieRating
             return count;
         }
 
+        //4
         public int[] GetMovieReviewed(int ReviewedMovie)
         {
             string path = @"W:/Skóli/CompulsoryTDDJSON/ratings.json";
@@ -129,9 +132,31 @@ namespace MovieRating
             Console.ReadLine();
         }
 
+        //5
         public int[] GetReviewersMovie(int MovieReviewed)
         {
-            throw new NotImplementedException();
+            Reviews rev;
+            string path = @"W:/Skóli/CompulsoryTDDJSON/ratings.json";
+            Console.WriteLine("Works");
+
+            IEnumerable<Reviews> hash = JsonConvert.DeserializeObject<IEnumerable<Reviews>>(File.ReadAllText(path));
+
+            Console.Write("Insert Movie ID: ");
+            int userInput1 = Convert.ToInt32(Console.ReadLine());
+            /*Console.Write("Grade: ");
+            int userInput2 = Convert.ToInt32(Console.ReadLine());*/
+            int count = 0;
+
+            foreach (var item in hash.Where(w => w.Movie == userInput1))
+            {
+                Console.WriteLine("Reviewer: " + item.Reviewer + " Movie: " + item.Movie + " Grade: " + item.Grade);
+                count++;
+            }
+            decimal avg = hash.Average(r => r.Grade);
+
+            Console.WriteLine("Number of reviewers that have reviewed this movie: " + count);
+            Console.WriteLine("Avg: " + avg);
+            Console.ReadLine();
         }
 
         public int[] GetTopGradeMovies(int MovieAmount)
