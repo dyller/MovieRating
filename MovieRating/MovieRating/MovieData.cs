@@ -135,7 +135,7 @@ namespace MovieRating
         //5
         public int[] GetReviewersMovie(int MovieReviewed)
         {
-            Reviews rev;
+
             string path = @"W:/Skóli/CompulsoryTDDJSON/ratings.json";
             Console.WriteLine("Works");
 
@@ -152,7 +152,7 @@ namespace MovieRating
                 Console.WriteLine("Reviewer: " + item.Reviewer + " Movie: " + item.Movie + " Grade: " + item.Grade);
                 count++;
             }
-            decimal avg = hash.Average(r => r.Grade);
+            double avg = hash.Average(r => r.Grade);
 
             Console.WriteLine("Number of reviewers that have reviewed this movie: " + count);
             Console.WriteLine("Avg: " + avg);
