@@ -85,7 +85,23 @@ namespace MovieRating
 
         public int[] CountReviews()
         {
-            throw new NotImplementedException();
+            string path = @"W:/Skóli/CompulsoryTDDJSON/ratings.json";
+            Console.WriteLine("Works");
+
+            IEnumerable<Reviews> hash = JsonConvert.DeserializeObject<IEnumerable<Reviews>>(File.ReadAllText(path));
+
+            int userInput1 = Convert.ToInt32(Console.ReadLine());
+            int userInput2 = Convert.ToInt32(Console.ReadLine());
+            int count = 0;
+            foreach (var item in hash.Where(w => w.Reviewer == userInput1).Where(o => o.Grade == userInput2))
+            {
+                Console.WriteLine("Reviewer: " + item.Reviewer + " Movie: " + item.Movie + " Grade: " + item.Grade);
+                count++;
+            }
+            Console.WriteLine(count);
+            Console.WriteLine("waa");
+            Console.ReadLine();
+            return count;
         }
 
         public int[] GetMovieReviewed(int ReviewedMovie)
