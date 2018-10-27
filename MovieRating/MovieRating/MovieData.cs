@@ -135,7 +135,6 @@ namespace MovieRating
         //5
         public int[] GetReviewersMovie(int MovieReviewed)
         {
-
             string path = @"W:/Skóli/CompulsoryTDDJSON/ratings.json";
             Console.WriteLine("Works");
 
@@ -146,19 +145,22 @@ namespace MovieRating
             /*Console.Write("Grade: ");
             int userInput2 = Convert.ToInt32(Console.ReadLine());*/
             int count = 0;
-
+            decimal avg = 0;
             foreach (var item in hash.Where(w => w.Movie == userInput1))
             {
                 Console.WriteLine("Reviewer: " + item.Reviewer + " Movie: " + item.Movie + " Grade: " + item.Grade);
                 count++;
             }
-            double avg = hash.Average(r => r.Grade);
+            //decimal avg = hash.Average(r => r.Grade);
+
+            avg = hash.Where(i => i.Movie == userInput1).Average(r => r.Grade);
 
             Console.WriteLine("Number of reviewers that have reviewed this movie: " + count);
             Console.WriteLine("Avg: " + avg.ToString("#.##"));
             Console.ReadLine();
         }
 
+        //6
         public int[] GetTopGradeMovies(int MovieAmount)
         {
             throw new NotImplementedException();
