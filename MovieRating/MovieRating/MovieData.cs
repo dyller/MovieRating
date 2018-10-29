@@ -234,21 +234,15 @@ namespace MovieRating
         //11
         public int[] GetReviewersMovie(int MovieReviewed)
         {
-
-            IEnumerable<Reviews> hash = JsonConvert.DeserializeObject<IEnumerable<Reviews>>(File.ReadAllText(path));
-            int[] MovieArray = new int[Reviews(ReviewedMovie)];
-            Console.Write("Insert Movie ID: ");
+            int[] MovieArray = new int[Reviews(MovieReviewed)];
             int userInput1 = Convert.ToInt32(Console.ReadLine());
-            /*Console.Write("Grade: ");
-            int userInput2 = Convert.ToInt32(Console.ReadLine());*/
             int count = 0;
 
             foreach (var item in hash.Where(w => w.Movie == userInput1).OrderBy(o => o.Reviewer).OrderByDescending(d => d.Grade).ThenByDescending(r => r.Date))
             {
-                Console.WriteLine("Reviewer: " + item.Reviewer + " Movie: " + item.Movie + " Grade: " + item.Grade + " Date: " + item.Date);
+                MovieArray[count] = item.Reviewer;
                 count++;
             }
-
             return MovieArray;
         }
     }
