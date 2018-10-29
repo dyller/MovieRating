@@ -217,26 +217,18 @@ namespace MovieRating
         {
             throw new NotImplementedException();
         }
-      
+
         //10
         public int[] GetMovieReviewed(int ReviewedMovie)
         {
-            int[][] MovieList = new int[Reviews(ReviewedMovie)][];
-           
-
-            foreach (var item in hash.Where(w => w.Movie == ReviewedMovie))
+            int[] MovieArray = new int[Reviews(ReviewedMovie)];
+            int count = 0;
+            foreach (var item in hash.Where(w => w.Reviewer == ReviewedMovie).OrderByDescending(d => d.Grade).ThenByDescending(r => r.Date))
             {
-                int count = 0;
-                foreach (int[] row in MovieList)
-                {
-                    count++;
-                    if (row[0] == item.Movie)
-                    {
-
-                    }
-                }
+                MovieArray[count] = item.Movie;
+                count++;
             }
-            return null;
+            return MovieArray;
         }
 
         //11
