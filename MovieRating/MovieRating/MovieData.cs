@@ -9,8 +9,11 @@ namespace MovieRating
 {
     public class MovieData : IMovieData
     {
-        public List<Reviews> list;
+       static string path = @"C:\Users\jacob\Downloads\ratings.json";
 
+      static IEnumerable<Reviews> hash = JsonConvert.DeserializeObject<IEnumerable<Reviews>>(File.ReadAllText(path));
+       public List<Reviews> list;
+         
         //This method is someway a layout.
         //public void JustBasic()
         //{
@@ -45,28 +48,20 @@ namespace MovieRating
         //1
         public int Reviews(int Reviewer)
         {
-            string path = @"W:/Skóli/CompulsoryTDDJSON/ratings.json";
-            Console.WriteLine("Works");
-
-            IEnumerable<Reviews> hash = JsonConvert.DeserializeObject<IEnumerable<Reviews>>(File.ReadAllText(path));
-
-            int userInput = Convert.ToInt32(Console.ReadLine());
+            int amountOfReviewer = 0;
             //int count = 0;
-            foreach (var item in hash.Where(w => w.Reviewer == userInput))
+            foreach (var item in hash.Where(w => w.Reviewer == Reviewer))
             {
-                Console.WriteLine("Reviewer: " + item.Reviewer + " Movie: " + item.Movie + " Grade: " + item.Grade);
-                Reviewer++;
-            }
-            Console.WriteLine(Reviewer + " amount of Reviews");
-            Console.ReadLine();
 
-            return Reviewer;
+                amountOfReviewer++;
+            }
+            return amountOfReviewer;
         }
 
         //2
         public double AverageGrade(double Reviewer)
         {
-            List<int> gradeList = new List<int>();
+            List<double> gradeList = new List<double>();
             double total = 0;
             double amount = 0;
             foreach (var grade in list.Where(g => g.Reviewer == Reviewer))
@@ -147,7 +142,7 @@ namespace MovieRating
             /*Console.Write("Grade: ");
             int userInput2 = Convert.ToInt32(Console.ReadLine());*/
             int count = 0;
-            decimal avg = 0;
+            double avg = 0;
             foreach (var item in hash.Where(w => w.Movie == userInput1))
             {
                 Console.WriteLine("Reviewer: " + item.Reviewer + " Movie: " + item.Movie + " Grade: " + item.Grade);
@@ -204,11 +199,26 @@ namespace MovieRating
         {
             throw new NotImplementedException();
         }
-
+      
         //10
         public int[] GetMovieReviewed(int ReviewedMovie)
         {
-            throw new NotImplementedException();
+            int[][] MovieList = new int[Reviews(ReviewedMovie)][];
+           
+
+            foreach (var item in hash.Where(w => w.Movie == ReviewedMovie))
+            {
+                int count = 0;
+                foreach (int[] row in MovieList)
+                {
+                    count++;
+                    if (row[0] == item.Movie)
+                    {
+
+                    }
+                }
+            }
+            return null;
         }
 
         //11
