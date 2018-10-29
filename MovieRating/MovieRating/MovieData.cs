@@ -59,7 +59,7 @@ namespace MovieRating
         }
 
         //2
-        public decimal AverageGrade(double Reviewer)
+        public double AverageGrade(double Reviewer)
         {
             List<double> gradeList = new List<double>();
             double total = 0;
@@ -209,7 +209,15 @@ namespace MovieRating
         //8
         public int[] CountReviews()
         {
-            throw new NotImplementedException();
+            int[] res = new int[1];
+            res[0]=hash.GroupBy(info => info.Reviewer)
+                           .Select(group => new
+                           {
+                               Metric = group.Key,
+                               Count = group.Count()
+                           })
+                           .OrderByDescending(x => x.Count).FirstOrDefault().Metric;
+            return res;
         }
 
         //9
