@@ -7,8 +7,8 @@ namespace MovieRating
     public class Reviews
     {
         public int Reviewer { get; set; }
-        public decimal Movie { get; set; }
-        public decimal Grade { get; set; }
+        public int Movie { get; set; }
+        public double Grade { get; set; }
         public String Date { get; set; }
     }
 }

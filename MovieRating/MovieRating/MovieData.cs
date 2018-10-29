@@ -9,8 +9,7 @@ namespace MovieRating
 {
     public class MovieData : IMovieData
     {
-       
-        public List<Tuple<decimal, decimal>> movieNGrade= new List<Tuple<decimal, decimal>>();
+        public List<Tuple<double, double>> movieNGrade= new List<Tuple<double, double>>();
         public List<Reviews> list;
 
         
@@ -29,94 +28,56 @@ namespace MovieRating
         {
             foreach (var movie in list.Take(10))
             {
-                decimal amount = 0;
-                decimal count = 0;
-                decimal average = 0;
-                decimal movieID = movie.Movie;
+                double amount = 0;
+                double count = 0;
+                double average = 0;
+                double movieID = movie.Movie;
                 foreach (var grade in list.Where(m => m.Movie == movieID))
                 {
                     amount = amount + grade.Grade;
                     count++;
                 }
                 average = amount / count;
-                movieNGrade.Add(new Tuple<decimal, decimal>(movieID, average));
+                movieNGrade.Add(new Tuple<double, double>(movieID, average));
                 Console.WriteLine("Movie " + movieID + " Average " + Math.Round(average, 2));
             }
 
             Console.WriteLine("Computing is finish.");
         }
 
-        //This method is someway a layout.
-        //public void JustBasic()
-        //{
-        //    using (StreamReader r = new StreamReader("C:/Users/Samuel/Downloads/ratings.json"))
-        //    {
-        //        Console.WriteLine("Reading File...");
-        //        var json = r.ReadToEnd();
-        //        List<Reviews> list = JsonConvert.DeserializeObject<List<Reviews>>(json);
-        //        Console.WriteLine("Deserialization finished.");
-
-        //        Console.WriteLine("Do you want start taking shits?");
-        //        string val = Console.ReadLine();
-        //        if (val == "Yes")
-        //        {
-        //            Console.WriteLine("Write");
-        //            int number = Convert.ToInt32(Console.ReadLine());
-        //            foreach (var item in list.Where(w => w.Reviewer == number))
-        //            {
-        //                Console.WriteLine("Reviewer " + item.Reviewer + "Movie " + item.Movie);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("You decided to dont");
-        //        }
-
-        //    }
-        //    Console.ReadLine();
-        //}
-
 
         //1
         public int Reviews(int Reviewer)
         {
-            string path = @"W:/Skóli/CompulsoryTDDJSON/ratings.json";
-            Console.WriteLine("Works");
-
-            IEnumerable<Reviews> hash = JsonConvert.DeserializeObject<IEnumerable<Reviews>>(File.ReadAllText(path));
-
-            int userInput = Convert.ToInt32(Console.ReadLine());
+            int amountOfReviewer = 0;
             //int count = 0;
-            foreach (var item in hash.Where(w => w.Reviewer == userInput))
+            foreach (var item in list.Where(w => w.Reviewer == Reviewer))
             {
-                Console.WriteLine("Reviewer: " + item.Reviewer + " Movie: " + item.Movie + " Grade: " + item.Grade);
-                Reviewer++;
-            }
-            Console.WriteLine(Reviewer + " amount of Reviews");
-            Console.ReadLine();
 
-            return Reviewer;
+                amountOfReviewer++;
+            }
+            return amountOfReviewer;
         }
 
         //2
-        public decimal AverageGrade(double Reviewer)
+        public double AverageGrade(double Reviewer)
         {
-            //List<decimal> gradeList = new List<decimal>();
-            //decimal total = 0;
-            //decimal amount = 0;
-            //foreach (var grade in list.Where(g => g.Reviewer == Reviewer))
-            //{
-            //    gradeList.Add(grade.Grade);
-            //    total = total + 1;
-            //}
-            //foreach (var number in gradeList)
-            //{
-            //    amount = amount + number;
-            //}
-            //decimal average = amount / total;
-            //Console.WriteLine("The average of this reviewer is....:" + Math.Round(average, 2));
-            // return average;
-            return 0;
+            List<double> gradeList = new List<double>();
+            double total = 0;
+            double amount = 0;
+            foreach (var grade in list.Where(g => g.Reviewer == Reviewer))
+            {
+                gradeList.Add(grade.Grade);
+                total = total + 1;
+            }
+            foreach (var number in gradeList)
+            {
+                amount = amount + number;
+            }
+            double average = amount / total;
+            Console.WriteLine("The average of this reviewer is....:" + Math.Round(average, 2));
+
+            return average;
         }
 
         //3
@@ -182,7 +143,7 @@ namespace MovieRating
             /*Console.Write("Grade: ");
             int userInput2 = Convert.ToInt32(Console.ReadLine());*/
             int count = 0;
-            decimal avg = 0;
+            double avg = 0;
             foreach (var item in hash.Where(w => w.Movie == userInput1))
             {
                 Console.WriteLine("Reviewer: " + item.Reviewer + " Movie: " + item.Movie + " Grade: " + item.Grade);
@@ -249,14 +210,22 @@ namespace MovieRating
         //8
         public int[] CountReviews()
         {
-            throw new NotImplementedException();
+            int[] res = new int[1];
+            res[0]=list.GroupBy(info => info.Reviewer)
+                           .Select(group => new
+                           {
+                               Metric = group.Key,
+                               Count = group.Count()
+                           })
+                           .OrderByDescending(x => x.Count).FirstOrDefault().Metric;
+            return res;
         }
 
         //9 On input N, what is top N of movies? The score of a movie is its average rate.
-        public List<decimal> GetTopGradeMovies(int MovieAmount)
+        public List<double> GetTopGradeMovies(int MovieAmount)
         {
             Console.WriteLine("Having a look...");
-            List<decimal> topMovies = new List<decimal>();
+            List<double> topMovies = new List<double>();
             foreach (var movieGraded in movieNGrade.OrderByDescending(g => g.Item2).Take(MovieAmount))
             {
                 var movies = movieGraded.Item1;
@@ -269,13 +238,29 @@ namespace MovieRating
         //10
         public int[] GetMovieReviewed(int ReviewedMovie)
         {
-            throw new NotImplementedException();
+            int[] MovieArray = new int[Reviews(ReviewedMovie)];
+            int count = 0;
+            foreach (var item in list.Where(w => w.Reviewer == ReviewedMovie).OrderByDescending(d => d.Grade).ThenByDescending(r => r.Date))
+            {
+                MovieArray[count] = item.Movie;
+                count++;
+            }
+            return MovieArray;
         }
 
         //11
         public int[] GetReviewersMovie(int MovieReviewed)
         {
-            throw new NotImplementedException();
+            int[] MovieArray = new int[Reviews(MovieReviewed)];
+            int userInput1 = Convert.ToInt32(Console.ReadLine());
+            int count = 0;
+
+            foreach (var item in list.Where(w => w.Movie == userInput1).OrderBy(o => o.Reviewer).OrderByDescending(d => d.Grade).ThenByDescending(r => r.Date))
+            {
+                MovieArray[count] = item.Reviewer;
+                count++;
+            }
+            return MovieArray;
         }
     }
 }
