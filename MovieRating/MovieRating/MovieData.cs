@@ -33,7 +33,6 @@ namespace MovieRating
                 decimal count = 0;
                 decimal average = 0;
                 decimal movieID = movie.Movie;
-                Console.WriteLine(movieID);
                 foreach (var grade in list.Where(m => m.Movie == movieID))
                 {
                     amount = amount + grade.Grade;
@@ -44,7 +43,7 @@ namespace MovieRating
                 Console.WriteLine("Movie " + movieID + " Average " + Math.Round(average, 2));
             }
 
-            Console.WriteLine("I finish");
+            Console.WriteLine("Computing is finish.");
         }
 
         //This method is someway a layout.
@@ -258,7 +257,7 @@ namespace MovieRating
         {
             Console.WriteLine("Having a look...");
             List<decimal> topMovies = new List<decimal>();
-            foreach (var movieGraded in movieNGrade.OrderBy(g => g.Item2).Take(MovieAmount))
+            foreach (var movieGraded in movieNGrade.OrderByDescending(g => g.Item2).Take(MovieAmount))
             {
                 var movies = movieGraded.Item1;
                 topMovies.Add(movies);
