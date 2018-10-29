@@ -23,7 +23,7 @@ namespace MovieRating
         //8. What reviewer(s) had done most reviews?
         int[] CountReviews();
         //9. On input N, what is top N of movies? The score of a movie is its average rate.
-        int[] GetTopGradeMovies(int MovieAmount);
+        List<decimal> GetTopGradeMovies(int MovieAmount);
         /**
          *10. On input N, what are the movies that reviewer N has reviewed? The list should
             be sorted decreasing by rate first, and date secondly.
