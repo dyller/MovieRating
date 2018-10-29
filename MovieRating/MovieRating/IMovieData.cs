@@ -9,7 +9,7 @@ namespace MovieRating
         //1. On input N, what are the number of reviews from reviewer N?
         int Reviews(int Reviewer);
         //2. On input N, what is the average rate that reviewer N had given?
-        decimal AverageGrade(double Reviewer);
+        double AverageGrade(double Reviewer);
         //3. On input N and G, how many times has reviewer N given a movie grade G?
         double ReviewerAmount(int Movie, int Reviewer);
         //4. On input N, how many have reviewed movie N?
