@@ -224,15 +224,18 @@ namespace MovieRating
         //9 On input N, what is top N of movies? The score of a movie is its average rate.
         public List<double> GetTopGradeMovies(int MovieAmount)
         {
-            Console.WriteLine("Having a look...");
-            List<double> topMovies = new List<double>();
-            foreach (var movieGraded in movieNGrade.OrderByDescending(g => g.Item2).Take(MovieAmount))
+            List<double>  tres= new List<double>();
+            foreach (var item in list.GroupBy(info => info.Movie)
+                          .Select(group => new
+                          {
+                              Metric = group.Key,
+                              avg = group.Average(r => r.Grade)
+                          })
+                          .OrderByDescending(x => x.avg).Take(5).ToList())
             {
-                var movies = movieGraded.Item1;
-                topMovies.Add(movies);
-                Console.WriteLine("Movie: " + movieGraded.Item1 + " Grade: " + Math.Round(movieGraded.Item2, 2));
+                tres.Add(item.avg);
             }
-            return topMovies;
+            return tres;
         }
 
         //10
