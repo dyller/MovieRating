@@ -61,15 +61,9 @@ namespace MovieRating
         //2
         public decimal AverageGrade(double Reviewer)
         {
-<<<<<<< HEAD
-            List<decimal> gradeList = new List<decimal>();
-            decimal total = 0;
-            decimal amount = 0;
-=======
             List<double> gradeList = new List<double>();
             double total = 0;
             double amount = 0;
->>>>>>> Jacob
             foreach (var grade in list.Where(g => g.Reviewer == Reviewer))
             {
                 gradeList.Add(grade.Grade);
@@ -79,7 +73,7 @@ namespace MovieRating
             {
                 amount = amount + number;
             }
-            decimal average = amount / total;
+            double average = amount / total;
             Console.WriteLine("The average of this reviewer is....:" + Math.Round(average, 2));
 
             return average;
