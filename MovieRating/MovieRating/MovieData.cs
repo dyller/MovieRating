@@ -59,7 +59,7 @@ namespace MovieRating
         }
 
         //2
-        public decimal AverageGrade(double Reviewer)
+        public double AverageGrade(double Reviewer)
         {
             List<double> gradeList = new List<double>();
             double total = 0;
