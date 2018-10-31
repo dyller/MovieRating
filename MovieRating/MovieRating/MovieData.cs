@@ -180,7 +180,7 @@ namespace MovieRating
                           })
                           .OrderByDescending(x => x.avg).Take(5).ToList())
             {
-                tres.Add(item.avg);
+                tres.Add(item.Metric);
             }
             return tres;
         }
