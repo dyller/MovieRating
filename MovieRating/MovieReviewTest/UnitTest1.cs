@@ -7,6 +7,7 @@ namespace MovieReviewTest
     public class UnitTest1
     {
        MovieData movie = new MovieData();
+        
         //1
         [TestMethod]
         public void Reviews()
