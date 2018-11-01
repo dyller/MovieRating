@@ -9,6 +9,7 @@ namespace MovieRating
 {
     public class MovieData : IMovieData
     {
+       
        // public List<Tuple<double, double>> movieNGrade= new List<Tuple<double, double>>();
       static  string path = @"C:\Users\jacob\Downloads\ratings.json";
 
@@ -77,8 +78,8 @@ namespace MovieRating
         public int[] CountReviews()
         {
             int countp = 0;
-            int counter = 0;
-            int[] res = new int[1000];
+            int[] res= null;
+            List<int> tres = new List<int>();
             foreach (var item in list.GroupBy(info => info.Reviewer)
                            .Select(group => new
                            {
@@ -87,15 +88,20 @@ namespace MovieRating
                            })
                            .OrderByDescending(x => x.Count))
             {
-                int countn = item.Count;
-                if (countn == countp || countp == 0)
+                if (item.Count == countp || countp == 0)
                 {
-                    countp = countn;
-                    res[counter] = item.Metric;
-                    counter++ ;
+                    countp = item.Count;
+                    tres.Add(item.Metric);
                 }
                 else
                 {
+                    res = new int[tres.Count];
+                    int count = 0;
+                    foreach (var reviewer in tres)
+                    {
+                        res[count] = reviewer;
+                        count++;
+                    }
                     break;
                 }
             }

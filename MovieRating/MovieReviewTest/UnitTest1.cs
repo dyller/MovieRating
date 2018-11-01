@@ -65,7 +65,8 @@ namespace MovieReviewTest
         public void CountReviews()
         {
             int[] movieCount = movie.CountReviews();
-            Assert.AreEqual(5, movieCount);
+            Assert.AreEqual(1, movieCount.Length);
+            Assert.AreEqual(571, movieCount.GetValue(0));
         }
 
         //9
@@ -80,16 +81,18 @@ namespace MovieReviewTest
         [TestMethod]
         public void GetMovieReviewed()
         {
-            double topGradeMovie = movie.MovieTopGrade();
-            Assert.AreEqual(5, topGradeMovie);
+            var topGradeMovie = movie.GetMovieReviewed(1000);
+            Assert.AreEqual(4, topGradeMovie.Length);
+            Assert.IsTrue(topGradeMovie[0] >= topGradeMovie[1]);
         }
 
         //11
         [TestMethod]
         public void GetReviewersMovie()
         {
-            double topGradeMovie = movie.MovieTopGrade();
-            Assert.AreEqual(5, topGradeMovie);
+            var topGradeMovie = movie.GetReviewersMovie(1000);
+            Assert.AreEqual(4, topGradeMovie.Length);
+            Assert.IsTrue(topGradeMovie[0] >= topGradeMovie[1]);
         }
 
     }
