@@ -24,7 +24,16 @@ namespace MovieReviewTest
             double avergeGrade = movie.AverageGrade(1000);
             Assert.AreEqual(2.5, avergeGrade);
         }
+<<<<<<< HEAD
 
+=======
+        [TestMethod]
+        public void AverageGrade()
+        {
+            double avergeGrade = movie.AverageGrade(1000);
+            Assert.AreEqual(2.5, avergeGrade);
+        }
+>>>>>>> Jacob
         //3
         [TestMethod]
         public void ReviewerAmount()
@@ -58,7 +67,12 @@ namespace MovieReviewTest
         public void MovieTopGrade()
         {
             double topGradeMovie = movie.MovieTopGrade();
-            Assert.AreEqual(5, topGradeMovie);
+            Assert.AreEqual(1664010, topGradeMovie);
+        }
+        //8. What reviewer(s) had done most reviews?
+        [TestMethod]
+        public void CountReviews()
+        {
         }
 
         //8
