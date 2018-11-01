@@ -14,7 +14,6 @@ namespace Executable
         {
             //Important stuffs
             var mD = new MovieData();
-            mD.ReadTheFile();
             // Just something pleasant :)
             Console.WriteLine("This can take at least 30m. Are you sure?(y/n)");
             if (Console.ReadLine().Equals("y"))
@@ -22,7 +21,6 @@ namespace Executable
 
                 Console.WriteLine("This is gonna compute for a very long time, you should go and do another task.");
                 //This part is for method #9
-                mD.Compute();
             }
             else
             {
@@ -32,7 +30,11 @@ namespace Executable
             Console.WriteLine("In order to execute the method, you need to type a number");
             int number = Convert.ToInt32(Console.ReadLine());
 
-            mD.GetTopGradeMovies(number);
+            
+            foreach (var item in mD.GetTopGradeMovies(number))
+            {
+                Console.WriteLine(item);
+            }
             Console.ReadLine();
         }
     }

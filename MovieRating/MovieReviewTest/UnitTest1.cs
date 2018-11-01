@@ -15,14 +15,16 @@ namespace MovieReviewTest
             int amountOffReviews=  movie.Reviews(1);
             Assert.AreEqual(547, amountOffReviews);
 
-        //2
+
         }
-        //[TestMethod]
-        //public void AverageGrade()
-        //{
-        //    double avergeGrade = movie.AverageGrade(1000);
-        //    Assert.AreEqual(2.5, avergeGrade);
-        //}
+        //2
+        [TestMethod]
+        public void AverageGrade()
+        {
+            double avergeGrade = movie.AverageGrade(1000);
+            Assert.AreEqual(2.5, avergeGrade);
+        }
+
         //3
         [TestMethod]
         public void ReviewerAmount()
@@ -54,6 +56,38 @@ namespace MovieReviewTest
         //7
         [TestMethod]
         public void MovieTopGrade()
+        {
+            double topGradeMovie = movie.MovieTopGrade();
+            Assert.AreEqual(5, topGradeMovie);
+        }
+
+        //8
+        [TestMethod]
+        public void CountReviews()
+        {
+            int[] movieCount = movie.CountReviews();
+            Assert.AreEqual(5, movieCount);
+        }
+
+        //9
+        [TestMethod]
+        public void GetTopGradeMovies()
+        {
+            var topGradeMovie = movie.GetTopGradeMovies(5);
+            Assert.AreEqual(topGradeMovie.Count, 5);
+        }
+
+        //10
+        [TestMethod]
+        public void GetMovieReviewed()
+        {
+            double topGradeMovie = movie.MovieTopGrade();
+            Assert.AreEqual(5, topGradeMovie);
+        }
+
+        //11
+        [TestMethod]
+        public void GetReviewersMovie()
         {
             double topGradeMovie = movie.MovieTopGrade();
             Assert.AreEqual(5, topGradeMovie);
