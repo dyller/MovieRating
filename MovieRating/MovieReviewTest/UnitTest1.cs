@@ -36,7 +36,7 @@ namespace MovieReviewTest
         public void MovieReviewsAmount()
         {
             double AmountOfReviews = movie.MovieReviewsAmount(1000);
-            Assert.AreEqual(4, AmountOfReviews);
+            Assert.AreEqual(5, AmountOfReviews);
         }
         //5
         [TestMethod]
