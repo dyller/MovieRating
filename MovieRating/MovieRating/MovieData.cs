@@ -11,7 +11,7 @@ namespace MovieRating
     {
        
        // public List<Tuple<double, double>> movieNGrade= new List<Tuple<double, double>>();
-      static  string path = @"C:\Users\jacob\Downloads\ratings.json";
+      static  string path = @"W:\Skóli\CompulsoryTDDJSON\ratings.json";
 
       static  IEnumerable<Reviews> list = JsonConvert.DeserializeObject<IEnumerable<Reviews>>(File.ReadAllText(path));
 
